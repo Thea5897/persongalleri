@@ -19,12 +19,24 @@
 
     <style>
       img {
-        max-width: 20%;
+        max-width: 100%;
       }
 
       article {
+        border: solid black;
+        border-style: double;
+        padding: 10px;
+      }
+
+      main {
         display: grid;
-        grid-template-columns: auto-fit;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1rem;
+      }
+
+      p {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 1rem;
       }
     </style>
 
