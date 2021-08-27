@@ -7,19 +7,59 @@
     <title>Persongalleri</title>
   </head>
   <body>
+    <main></main>
+    <template>
+      <article>
+        <img src="" alt="" class="billede" />
+        <h2 class="navn"></h2>
+        <p class="titel"></p>
+        <p class="fødselsdag"></p>
+      </article>
+    </template>
+
+    <style>
+      img {
+        max-width: 20%;
+      }
+
+      article {
+        display: grid;
+        grid-template-columns: auto-fit;
+      }
+    </style>
+
     <script>
       const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+
       const options = {
-        Headers: {
+        headers: {
           "x-apikey": "600fe9211346a1524ff12e31",
         },
       };
 
       async function hentData() {
-        const resspons = await fetch(url, options);
-        const json = await resspons.json();
+        const respons = await fetch(url, options);
+        const json = await respons.json();
         vis(json);
+        // console.log(json);
       }
+
+      const main = document.querySelector("main");
+      const template = document.querySelector("template").content;
+
+      function vis(json) {
+        console.log(json);
+        json.forEach((person) => {
+          const klon = template.cloneNode(true);
+          klon.querySelector("img").src = "faces/" + person.billede;
+          klon.querySelector(".navn").textContent = person.navn;
+          klon.querySelector(".titel").textContent = person.titel;
+          klon.querySelector(".fødselsdag").textContent = person.fødselsdag;
+          main.appendChild(klon);
+        });
+      }
+
+      hentData();
     </script>
   </body>
 </html>
